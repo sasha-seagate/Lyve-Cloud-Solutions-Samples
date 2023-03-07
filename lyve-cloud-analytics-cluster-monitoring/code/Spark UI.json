@@ -1,0 +1,621 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 29,
+  "iteration": 1675677992140,
+  "links": [],
+  "panels": [
+    {
+      "datasource": "monitoring",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "displayMode": "color-text",
+            "filterable": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Creation Time"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsIso"
+              },
+              {
+                "id": "custom.width",
+                "value": 160
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "App Name"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Go to Spark UI",
+                    "url": "http://${__data.fields.App Name}.${__data.fields.Namespace}﻿.app.seagate-iguazio-prod.seagate.com"
+                  }
+                ]
+              },
+              {
+                "id": "mappings",
+                "value": []
+              },
+              {
+                "id": "custom.width",
+                "value": 308
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Namespace"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 135
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "namespace"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 114
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Executor Count"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 145
+              },
+              {
+                "id": "custom.displayMode",
+                "value": "gradient-gauge"
+              },
+              {
+                "id": "noValue",
+                "value": "0"
+              },
+              {
+                "id": "max",
+                "value": 300
+              },
+              {
+                "id": "min",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Elapsed Time"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 142
+              },
+              {
+                "id": "unit",
+                "value": "dateTimeFromNow"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Driver Log"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Go to driver log",
+                    "url": "https://dashboard.${__data.fields.Namespace}﻿﻿﻿﻿﻿﻿﻿﻿.app.seagate-iguazio-prod.seagate.com/mlprojects/default/jobs/monitor/${__data.fields[\"Driver Log\"]}/logs"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Executor Pending"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 144
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "frameIndex": 0,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Elapsed Time"
+          }
+        ]
+      },
+      "pluginVersion": "7.2.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": false,
+          "expr": "sum (kube_pod_labels{namespace=~\"$namespace\", label_spark_role=\"driver\", label_project_name=~\"$project\"} * on (endpoint, instance, job, namespace, pod, service) group_left(phase) (kube_pod_status_phase{phase=~\"^(Running|Pending)$\"} == 1)) by (namespace, pod, label_sparkoperator_k8s_io_app_name, label_mlrun_uid) * on(pod,namespace) group_left kube_pod_created{namespace=~\"$namespace\", pod=~\".*-driver\"} * 1000",
+          "format": "table",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": false,
+          "expr": "sum(kube_pod_labels{namespace=~\"$namespace\", label_spark_role=\"executor\", label_project_name=~\"$project\"} * on (endpoint, instance, job, namespace, pod, service) group_left(phase) (kube_pod_status_phase{namespace=~\"$namespace\", phase=~\"^(Running)$\"} == 1)) by (label_sparkoperator_k8s_io_app_name)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "exemplar": false,
+          "expr": "sum(kube_pod_labels{namespace=~\"$namespace\", label_spark_role=\"executor\", label_project_name=~\"$project\"} * on (endpoint, instance, job, namespace, pod, service) group_left(phase) (kube_pod_status_phase{namespace=~\"$namespace\", phase=~\"^(Pending)$\"} == 1)) by (label_sparkoperator_k8s_io_app_name)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "C"
+        }
+      ],
+      "title": "Spark Applications - Running",
+      "transformations": [
+        {
+          "id": "seriesToColumns",
+          "options": {
+            "byField": "label_sparkoperator_k8s_io_app_name"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Elapsed Time",
+            "binary": {
+              "left": "Time 1",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "Value #B"
+            },
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "Value #A"
+              ],
+              "reducer": "first"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "Time 1": true,
+              "Time 2": true,
+              "Value #A": false,
+              "Value #B": false,
+              "namespace": false,
+              "pod": true
+            },
+            "indexByName": {
+              "Elapsed Time": 5,
+              "Time": 7,
+              "Value #A": 0,
+              "Value #B": 3,
+              "Value #C": 4,
+              "label_sparkoperator_k8s_io_app_name": 2,
+              "namespace": 1,
+              "pod": 6
+            },
+            "renameByName": {
+              "Time": "",
+              "Value #A": "Creation Time",
+              "Value #B": "Executor Count",
+              "Value #C": "Executor Pending",
+              "label_mlrun_uid": "Driver Log",
+              "label_sparkoperator_k8s_io_app_name": "App Name",
+              "namespace": "Namespace",
+              "pod": ""
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": "monitoring",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "color-text",
+            "filterable": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "History Server"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Go to History Server",
+                    "url": "https://spark-hs.edp.seagate.com/history/${__data.fields[\"History Server\"]}/jobs/"
+                  }
+                ]
+              },
+              {
+                "id": "custom.width",
+                "value": 594
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Namespace"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 118
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Creation Time"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 149
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Status"
+            },
+            "properties": [
+              {
+                "id": "noValue",
+                "value": "Succeeded"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Duration"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "ms"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 6,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Creation Time"
+          }
+        ]
+      },
+      "pluginVersion": "7.2.0",
+      "targets": [
+        {
+          "exemplar": false,
+          "expr": "kube_pod_labels{namespace=~\"$namespace\", label_spark_role=\"driver\", label_project_name=~\"$project\"} * on (endpoint, instance, job, namespace, pod, service) group_left(phase) (kube_pod_status_phase{namespace=~\"$namespace\", pod=~\".*-driver\", phase=~\"^(Succeeded|Failed)$\"} == 1)",
+          "format": "table",
+          "instant": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "Spark Applications - Finished",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Creation Time": ""
+            }
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Time": {
+                "aggregations": [
+                  "first"
+                ],
+                "operation": "aggregate"
+              },
+              "Time 1": {
+                "aggregations": [
+                  "first"
+                ],
+                "operation": "aggregate"
+              },
+              "label_spark_app_selector": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "label_sparkoperator_k8s_io_app_name": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "namespace": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "namespace 1": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "phase": {
+                "aggregations": [],
+                "operation": "groupby"
+              }
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time (diff)": false,
+              "namespace": false
+            },
+            "indexByName": {
+              "Time (diff)": 3,
+              "Time (first)": 0,
+              "label_spark_app_selector": 5,
+              "label_sparkoperator_k8s_io_app_name": 2,
+              "namespace": 1,
+              "phase": 4
+            },
+            "renameByName": {
+              "Time (diff)": "Duration",
+              "Time (first)": "Creation Time",
+              "Time (range)": "Duration",
+              "Time 1 (first)": "Creation Time",
+              "label_spark_app_selector": "History Server",
+              "label_sparkoperator_k8s_io_app_name": "App Name",
+              "namespace": "Namespace",
+              "phase": "Status"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": "30s",
+  "schemaVersion": 26,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": "",
+        "current": {
+          "selected": true,
+          "text": [
+            "default-tenant"
+          ],
+          "value": [
+            "default-tenant"
+          ]
+        },
+        "datasource": "monitoring",
+        "definition": "label_values(kube_pod_labels{label_spark_role=\"driver\"}, namespace)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Namespace",
+        "multi": true,
+        "name": "namespace",
+        "options": [],
+        "query": "label_values(kube_pod_labels{label_spark_role=\"driver\"}, namespace)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": "monitoring",
+        "definition": "label_values(kube_pod_labels, label_project_name)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Project",
+        "multi": false,
+        "name": "project",
+        "options": [],
+        "query": "label_values(kube_pod_labels, label_project_name)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Spark UI",
+  "uid": "lwPCGMKVk",
+  "version": 1
+}
