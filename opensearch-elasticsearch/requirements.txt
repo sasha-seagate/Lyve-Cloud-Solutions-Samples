@@ -11,7 +11,7 @@ flask-cors
 flask-httpauth
 flask-wtf
 gunicorn
-numpy==1.22.0
+numpy==1.24.2
 pandas
 pytz
 pyyaml
