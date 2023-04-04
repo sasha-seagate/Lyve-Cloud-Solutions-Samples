@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Primary Meta Tags -->
+    {% include 'includes/metadata.html' %}
+
+    <title>
+    {% block title %}{% endblock %}
+    </title>
+
+    <!-- Specific Page CSS goes HERE  -->
+    {% include 'includes/framework.html' %}
+    {% block stylesheets %}{% endblock stylesheets %}
+
+</head>
+
+<body>
+
+    {% include 'includes/navigation.html' %}
+    {% block sub_navigation %}{% endblock sub_navigation %}
+
+    <main>
+    {% block content %}{% endblock content %}
+    </main>
+
+    {% include 'includes/footer.html' %}
+
+    {% include 'includes/scripts.html' %}
+
+    <!-- Specific Page JS goes HERE  -->
+    {% block javascripts %}{% endblock javascripts %}
+
+</body>
+</html>

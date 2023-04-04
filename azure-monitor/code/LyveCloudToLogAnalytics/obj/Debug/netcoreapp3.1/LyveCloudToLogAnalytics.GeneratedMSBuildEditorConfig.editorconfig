@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = LyveCloudToLogAnalytics
+build_property.ProjectDir = c:\SDK\Lyve-Cloud-Solutions-Samples\azure-monitor\code\LyveCloudToLogAnalytics\

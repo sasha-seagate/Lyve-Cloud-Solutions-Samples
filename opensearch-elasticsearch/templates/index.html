@@ -1,0 +1,40 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}{{ app_title }} by Korat Drive Maintenance Engineering{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+
+
+<!-- Begin page content -->
+{% block content %}
+<div class="container user-select-none">
+    <header class="d-flex flex-wrap justify-content-start p-2 my-4 border-bottom">
+        <h1>Welcome! {{ app_title }}</h1>
+    </header>
+
+    <main class="d-flex flex-wrap justify-content-center">
+        <div class="container p-0 m-0">
+            <p>Developed by Drive Maintenance Engineering</p>
+            <p>Contact admin: <a href="mailto:thanit.karnthak@seagate.com">thanit.karnthak@seagate.com</a> for any inquiry.</p>
+        </div>
+
+        <div class="container p-0 my-4">
+            <p>Try Our Example:</p>
+            <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">application version: {{ app_version }}</a>
+              <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">current date: {{ now }}</a>
+              <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">server uptime: {{ service_uptime }}</a>
+              {{ endpoint_link | safe}}
+            </div>
+        </div>
+
+    </main>
+</div>
+
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

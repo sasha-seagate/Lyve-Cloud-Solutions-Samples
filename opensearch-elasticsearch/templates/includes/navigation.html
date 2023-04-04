@@ -1,0 +1,42 @@
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+
+            <a class="navbar-brand" href="/"><img src="../static/assets/images/lyve_cloud_logo.png" alt="Lyve Logo" height="36" class="d-inline-block align-text-top"></a>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="/">Home</a></li>
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">System</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/api/v1/status">API Status</a></li>
+                            <li><a class="dropdown-item" href="/info" target="_blank">Server Info</a></li>
+                            <li><a class="dropdown-item" href="/server_log">Server Logs</a></li>
+                            <li><a class="dropdown-item" href="/server_performance" target="_blank">Server Performance</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link disabled" href="/about">About</a></li>
+                </ul>
+
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" disabled>
+                    <button class="btn btn-primary disabled" type="submit">Search</button>
+                </form>
+            </div>
+
+            <button class="navbar-toggler my-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+        </div>
+    </nav>
+</header>
+
+<header class="bg-dark text-white">
+    <div class="container">
+        <div class="navbar-brand">{{ app_title }}</div>
+    </div>
+</header>

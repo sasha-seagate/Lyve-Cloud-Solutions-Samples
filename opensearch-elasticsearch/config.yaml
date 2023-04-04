@@ -1,0 +1,63 @@
+# Data Source
+lyvecloud:
+  access_key: 'RIDQ4GQKRT5RPWXU'
+  secret_key: 'HAUT5LXVFCU0COQHWN3TXZY4XKR34ERS'
+  log_bucket: 'logs0001'
+  endpoint_url: 'https://s3.us-east-1.lyvecloud.seagate.com'
+
+
+# Data Destination
+destination:
+  - opensearch
+
+
+# Data Destination and its settings
+opensearch:
+  stack_version: '2.x.x'
+
+  # URL format: <protocol>://<hostname or ip address>:<port>
+  server_url: 'https://korpikwnl07b.seagate.com:9660'
+  dashboard_url: 'http://korpikwnl07b.seagate.com:9662'
+  tenant: 'lyve-cloud-sdk'
+
+  # Authentication Mode. Available options: ['basic', 'api_key', 'cloud_id']
+  # Login Option 1: basic     --> Basic Authentication
+  # Login Option 2: api_key   --> API key for access without requiring basic authentication.
+  # Login Option 3: cloud_id  --> Cloud Service
+  authentication_mode: 'basic'
+  credentials:
+    - username: 'seagate'
+    - password: 'seagate1234'
+    - api_key_id: null
+    - api_key_value: null
+
+  # TLS/SSL (set use_ssl_certs=null, if you don't want to use HTTPs with CA certificate)
+  use_ssl_certs: true
+  verify_certs: false
+  ca_certs: '/path/to/root-ca.pem'
+  client_cert: '/path/to/admin.pem'
+  client_key: '/path/to/admin-key.pem'
+
+  # Index Name format <domain>.<category>.<sub-category>-<version>
+  api_audit_index_name: 'lyve.cloud.system.audit-v1'
+  iam_index_name: 'lyve.cloud.system.iam-v1'
+  console_index_name: 'lyve.cloud.system.console-v1'
+  parser_index_name: 'lyve.cloud.system.parser-v1'
+
+  # Parser Engine
+  lyve_parser_log_enable: true
+
+  # Enable/Disable Data Ingestion to OpenSearch
+  allow_data_ingression: true
+
+  # Adding a small amout of delay to avoid [WinError 10048] error.
+  max_thread_pool: -1
+  max_process_pool: -1
+  min_sleep: 0.001
+  max_sleep: 0.01
+
+  # Verbose ELK failure detail
+  verbose: true
+
+  # Continue parsing next row (next record) on error.
+  continue_on_error: true

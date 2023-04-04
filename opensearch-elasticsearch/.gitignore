@@ -1,0 +1,78 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# byte-compiled / optimized / DLL files
+*.egg
+*.egg-info
+*.py[cod]
+*.pytest_cache
+.cache/
+.DS_Store
+.idea/
+.tox
+__pycache__/
+_mailinglist
+build
+dist
+
+
+# Environments
+.env
+.flaskenv
+.LOCK
+env
+env*
+P.LOCK
+venv
+
+
+# Temp files
+.tmp/
+/local
+/app-data
+/app-keepml
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+# Database & logs
+*.db
+*.sqlite3
+*.log
+
+
+# Editor
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+
+# Coverage reports
+/coverage
+htmlcov
+.coverage
+.coverage.*
+*,cover
+
+
+# sphinx docs
+_build
+_static
+_templates
+
+
+# javascript
+package-lock.json
+.vscode/symbols.json
+
+# dependencies
+/node_modules
+
+
+# User Folders
+logs/
+data/
+*.zip
+my_backup/
