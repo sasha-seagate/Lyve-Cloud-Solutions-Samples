@@ -1,1 +1,0 @@
-export const mainContentHeight = "calc(100vh - 64px - 70px)";

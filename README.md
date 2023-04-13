@@ -23,12 +23,11 @@ Notice the integration solutions are not part of the Lyve Cloud product. The int
 *Please click on the arrows to expand*
 <details><summary>Migrating and syncing to Lyve Cloud</summary> 
 
-| Solution|Source |Technology|Installation|
-|  --- |  --- | ---| ---|
-| 1. [On-demand sync of Linux local directory to Lyve Cloud bucket.](s3sync-local-to-lyvecloud/)| Linux |Cronjob|Manual
-| 2. [Migrating and syncing between AWS and Lyve Cloud buckets.](syncer/)|AWS|AWS Lambda|Cli-Tool|
-| 3. [Replicating new objects created in AWS S3 bucket to a Lyve Cloud bucket.](s3-replication-to-lyvecloud/)|AWS|AWS Lambda|Manual|
-| 4. [Full-stack solution for easily migrating and synchronizing files from other cloud services to Lyve Cloud](data-migration-and-sync-to-lyvecloud/). | Generic S3, GCP, Alibaba, Azure Containers | Web App| ---|
+| Solution|Source |Technology
+|  --- |  --- | ---
+| 1. [On-demand sync of Linux local directory to Lyve Cloud bucket.](s3sync-local-to-lyvecloud/)| Linux |Cronjob
+| 2. [Migrating and syncing between AWS and Lyve Cloud buckets.](syncer/)|AWS|AWS Lambda
+| 3. [Replicating new objects created in AWS S3 bucket to a Lyve Cloud bucket.](s3-replication-to-lyvecloud/)|AWS|AWS Lambda
 
 </details>
 
